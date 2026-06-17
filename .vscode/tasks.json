@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "烧录 STM32 (STM32CubeProgrammer)",
+            "type": "shell",
+            "command": "C:\\Users\\Admin\\AppData\\Local\\stm32cube\\bundles\\programmer\\2.22.0+st.1\\bin\\STM32_Programmer_CLI.exe",
+            "args": [
+                "-c", "port=SWD", "connectUnderReset",
+                "-w", "${workspaceFolder}\\build\\Debug\\test2_LED.elf",
+                "-v",
+                "-rst"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
