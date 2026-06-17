@@ -202,8 +202,9 @@ void SysTick_Handler(void)
 /* USER CODE BEGIN 1 */
 
 /**
-  * @brief  TIM2 interrupt handler.
-  *         Dispatches to HAL_TIM_IRQHandler → HAL_TIM_PeriodElapsedCallback.
+  * @brief  TIM2中断服务函数。
+  * @note   中断链路：TIM2溢出 → TIM2_IRQHandler
+  *          → HAL_TIM_IRQHandler → HAL_TIM_PeriodElapsedCallback → 置位tim_flag。
   */
 void TIM2_IRQHandler(void)
 {

@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
   * @file    led.h
-  * @brief   LED control functions header
+  * @brief   LED控制函数头文件
   *
-  *          Provides high-level LED abstraction on top of GPIO HAL.
-  *          The onboard LED on PC13 is active-low (RESET = ON, SET = OFF).
+  *          在HAL GPIO之上封装高层LED操作接口。
+  *          板载LED位于PC13，低电平点亮（高电平熄灭）。
   ******************************************************************************
   */
 
@@ -15,23 +15,25 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+/* 头文件引用 ----------------------------------------------------------------*/
 #include "main.h"
 
-/* Exported functions prototypes ---------------------------------------------*/
+/* 导出函数声明 --------------------------------------------------------------*/
 
 /**
-  * @brief  Turn the onboard LED on.
+  * @brief  点亮LED。
+  * @note   PC13低电平有效，写RESET拉低引脚→LED亮。
   */
 void LED_On(void);
 
 /**
-  * @brief  Turn the onboard LED off.
+  * @brief  熄灭LED。
+  * @note   写SET拉高引脚→LED灭。
   */
 void LED_Off(void);
 
 /**
-  * @brief  Toggle the onboard LED state.
+  * @brief  翻转LED状态。
   */
 void LED_Toggle(void);
 

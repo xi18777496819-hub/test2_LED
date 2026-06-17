@@ -1,10 +1,15 @@
 /**
   ******************************************************************************
   * @file    tim.h
-  * @brief   TIM2 timer configuration header
+  * @brief   TIM2定时器配置头文件
   *
-  *          TIM2 generates a 0.5 s period interrupt for the LED blink task.
-  *          Clock: 72 MHz → ÷7200 → 10 kHz; Period: 5000 → 0.5 s.
+  *          TIM2产生0.5秒周期的定时中断，供LED闪烁任务使用。
+  *
+  *          时钟树计算：
+  *            TIM2挂载APB1，APB1 = 36MHz，分频系数 ≠ 1
+  *            → TIM2时钟 = 36MHz × 2 = 72MHz
+  *            → 预分频器 = 7200 - 1 = 7199  →  计数频率 = 72MHz / 7200 = 10kHz
+  *            → 自动重载 = 5000 - 1 = 4999  →  溢出周期 = 5000 / 10kHz = 0.5s
   ******************************************************************************
   */
 
@@ -15,22 +20,25 @@
 extern "C" {
 #endif
 
-/* Includes ------------------------------------------------------------------*/
+/* 头文件引用 ----------------------------------------------------------------*/
 #include "main.h"
 
-/* Exported variables --------------------------------------------------------*/
+/* 导出变量 ------------------------------------------------------------------*/
+
+/** TIM2句柄，供中断服务函数和启动函数使用 */
 extern TIM_HandleTypeDef htim2;
 
 /**
-  * @brief  Blink flag set by TIM2 ISR every 0.5 s.
-  * @note   Defined in main.c. Cleared by main loop after consuming.
+  * @brief  闪烁标志位。
+  * @note   由TIM2中断服务函数每0.5秒置1，主循环消费后清零。
+  *          定义在 main.c 中。
   */
 extern volatile uint8_t tim_flag;
 
-/* Exported functions prototypes ---------------------------------------------*/
+/* 导出函数声明 --------------------------------------------------------------*/
 
 /**
-  * @brief  Initialize TIM2 for 0.5 s periodic interrupt.
+  * @brief  初始化TIM2，配置为0.5秒周期中断。
   */
 void MX_TIM2_Init(void);
 

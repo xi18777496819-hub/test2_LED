@@ -45,7 +45,7 @@
 
 /* USER CODE BEGIN PV */
 
-/* TIM2 blink flag — set by ISR every 0.5 s, consumed by main loop */
+/* TIM2闪烁标志位 — 中断服务函数每0.5秒置1，主循环消费后清零 */
 volatile uint8_t tim_flag = 0;
 
 /* USER CODE END PV */
@@ -92,7 +92,7 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
 
-  /* Initialize TIM2 with 0.5 s period and start interrupts */
+  /* 初始化TIM2（0.5秒周期）并启动中断 */
   MX_TIM2_Init();
   HAL_TIM_Base_Start_IT(&htim2);
 
@@ -106,11 +106,11 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-    /* Blink LED on each 0.5 s timer flag */
+    /* 检测定时器标志位，每0.5秒翻转一次LED */
     if (tim_flag)
     {
-      tim_flag = 0;
-      LED_Toggle();
+      tim_flag = 0;    /* 清除标志 */
+      LED_Toggle();    /* 翻转LED */
     }
   }
   /* USER CODE END 3 */

@@ -36,7 +36,7 @@ extern "C" {
 
 /* USER CODE END Private defines */
 
-/* LED pin defines — PC13, active-low on Blue Pill */
+/* LED引脚宏定义 — PC13，低电平点亮（Blue Pill开发板） */
 #define LED_GPIO_Port  GPIOC
 #define LED_Pin        GPIO_PIN_13
 
